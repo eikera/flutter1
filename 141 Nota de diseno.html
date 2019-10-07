@@ -1,0 +1,48 @@
+<html>
+                <head>
+                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <title>141 Nota de diseno</title>
+                </head>
+                <body>
+                <div class="container">
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="lead"><h4>Nota de Actualización:</h4><p><br></p><p>En la próxima clase, entre otras cosas, vamos a implementar el Blur de nuestra aplicación, el cual en dispositivos Android puede que nos de el siguiente error:</p><figure><img height="457" src="https://udemy-images.s3.amazonaws.com:443/redactor/raw/2019-05-25_03-16-20-4623c58c214deafe006c70c5a5b56a67.png" width="257"></figure><p>Si este es su caso cuando terminen el video de la próxima clase, añadan el ClipRect en el método que crea los botones redondeados:</p><p><strong>1- </strong>Añadí el ClipRect y me funcionó bien:</p><pre class="prettyprint linenums">Widget _crearBotonRedondeado( Color color, IconData icono, String texto ) {
+
+
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur( sigmaX: 10.0, sigmaY: 10.0 ),
+        child: Container(
+          height: 180.0,
+          margin: EdgeInsets.all(15.0),
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(62, 66, 107, 0.7),
+            borderRadius: BorderRadius.circular(20.0)
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: &lt;Widget&gt;[
+              SizedBox( height: 5.0 ),
+              CircleAvatar(
+                backgroundColor: color,
+                radius: 35.0,
+                child: Icon( icono, color: Colors.white, size: 30.0 ),
+              ),
+              Text( texto , style: TextStyle( color: color )),
+              SizedBox( height: 5.0 )
+            ],
+          ),
+
+        ),
+      ),
+    );
+  }</pre><p><br></p><p><strong>2- (opcional)</strong> No me gusto la barra blanca de Status, así que en el main, en el build de MyApp coloqué esto:</p><pre class="prettyprint linenums">SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.transparent
+));</pre><p><br></p></p>
+                </div>
+                </div>
+                </div>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                </body>
+                </html>
